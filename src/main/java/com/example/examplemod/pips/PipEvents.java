@@ -31,18 +31,10 @@ public class PipEvents {
 
         if (RANDOM.nextFloat() < 0.20f) {
             pips.addPowerPip();
-            player.sendSystemMessage(Component.literal("Power Pip gained!"));
         } else {
             pips.addNormalPip();
-            player.sendSystemMessage(Component.literal("Pip gained!"));
         }
 
-        player.sendSystemMessage(
-                Component.literal(
-                        "Pips: " + pips.getPips()
-                                + " | Power Pips: "
-                                + pips.getPowerPips()
-                )
-        );
+
     }
 }

@@ -9,6 +9,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import com.example.examplemod.gui.PipHudOverlay;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Minecast101.MODID, dist = Dist.CLIENT)
@@ -27,5 +29,9 @@ public class Minecast101Client {
         // Some client setup code
         Minecast101.LOGGER.info("HELLO FROM CLIENT SETUP");
         Minecast101.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+    @SubscribeEvent
+    static void registerGuiLayers(RegisterGuiLayersEvent event) {
+        PipHudOverlay.registerGuiLayers(event);
     }
 }
