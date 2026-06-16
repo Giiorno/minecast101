@@ -1,5 +1,6 @@
 package com.example.examplemod;
 
+import com.example.examplemod.items.NoviceWandItem;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -7,7 +8,6 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -28,6 +28,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.example.examplemod.pips.PipEvents;
+import com.example.examplemod.commands.CommandEvents;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Minecast101.MODID)
@@ -81,7 +83,8 @@ public class Minecast101 {
         // Note that this is necessary if and only if we want *this* class (Minecast101) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
-
+        NeoForge.EVENT_BUS.register(PipEvents.class);
+        NeoForge.EVENT_BUS.register(CommandEvents.class);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
