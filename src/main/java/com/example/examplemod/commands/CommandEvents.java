@@ -1,13 +1,14 @@
 package com.example.examplemod.commands;
 
+import com.example.examplemod.pips.PipCommands;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import com.example.examplemod.pips.PipCommands;
 
 public class CommandEvents {
 
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         PipCommands.register(event.getDispatcher());
+        SpellCommands.register(event.getDispatcher());
     }
 }
