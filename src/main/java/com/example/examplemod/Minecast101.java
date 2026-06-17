@@ -33,6 +33,7 @@ import com.example.examplemod.commands.CommandEvents;
 import com.example.examplemod.items.SpellCardItem;
 import com.example.examplemod.spells.fire.FirecatSpell;
 import com.example.examplemod.spells.balance.ScarabSpell;
+import com.example.examplemod.combat.DamageNumberEvents;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Minecast101.MODID)
@@ -107,6 +108,7 @@ public class Minecast101 {
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(PipEvents.class);
         NeoForge.EVENT_BUS.register(CommandEvents.class);
+        NeoForge.EVENT_BUS.register(DamageNumberEvents.class);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 

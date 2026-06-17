@@ -6,6 +6,7 @@ import com.example.examplemod.pips.PipManager;
 import com.example.examplemod.pips.PlayerPips;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import com.example.examplemod.combat.DamageNumberManager;
 
 public class SpellDamageCalculator {
 
@@ -93,6 +94,11 @@ public class SpellDamageCalculator {
                 cast.getCaster()
                         .damageSources()
                         .magic(),
+                damage
+        );
+
+        DamageNumberManager.spawn(
+                target,
                 damage
         );
     }
