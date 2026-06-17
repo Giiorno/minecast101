@@ -2,6 +2,8 @@
   "itemGroup.minecast101": "Example Mod Tab",
   "block.minecast101.example_block": "Example Block",
   "item.minecast101.novice_wand": "Novice Wand",
+  "item.minecast101.firecat_card": "Firecat",
+  "item.minecast101.scarab_card": "Scarab",
 
   "minecast101.configuration.title": "Minecast101 Configs",
   "minecast101.configuration.section.minecast101.common.toml": "Minecast101 Configs",

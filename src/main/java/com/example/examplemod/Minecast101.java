@@ -30,6 +30,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import com.example.examplemod.pips.PipEvents;
 import com.example.examplemod.commands.CommandEvents;
+import com.example.examplemod.items.SpellCardItem;
+import com.example.examplemod.spells.fire.FirecatSpell;
+import com.example.examplemod.spells.balance.ScarabSpell;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Minecast101.MODID)
@@ -56,6 +59,23 @@ public class Minecast101 {
                     "novice_wand",
                     NoviceWandItem::new
             );
+    public static final DeferredItem<Item> FIRECAT_CARD =
+            ITEMS.registerItem(
+                    "firecat_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            FirecatSpell::new
+                    )
+            );
+
+    public static final DeferredItem<Item> SCARAB_CARD =
+            ITEMS.registerItem(
+                    "scarab_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            ScarabSpell::new
+                    )
+            );
 
     // Creates a creative tab with the id "minecast101:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
@@ -63,7 +83,9 @@ public class Minecast101 {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> NOVICE_WAND.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(NOVICE_WAND.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(NOVICE_WAND.get());
+                output.accept(FIRECAT_CARD.get());
+                output.accept(SCARAB_CARD.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
