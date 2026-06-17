@@ -1,6 +1,7 @@
 package com.example.examplemod.pips;
 
-import net.minecraft.network.chat.Component;
+import com.example.examplemod.combat.CombatManager;
+import com.example.examplemod.combat.PlayerCombatStats;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -8,6 +9,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import java.util.Random;
 
 public class PipEvents {
+
     private static final Random RANDOM = new Random();
 
     @SubscribeEvent
@@ -23,18 +25,34 @@ public class PipEvents {
             return;
         }
 
-        PlayerPips pips = PipManager.get(player);
+        PlayerPips pips =
+                PipManager.get(player);
 
         if (pips.getTotalPips() >= 7) {
             return;
         }
 
-        if (RANDOM.nextFloat() < 0.20f) {
+        PlayerCombatStats stats =
+                CombatManager.getStats(player);
+
+        float powerPipChance =
+                stats.getPowerPipChance();
+
+        if (powerPipChance < 0) {
+            powerPipChance = 0;
+        }
+
+        if (powerPipChance > 100) {
+            powerPipChance = 100;
+        }
+
+        float roll =
+                RANDOM.nextFloat() * 100f;
+
+        if (roll < powerPipChance) {
             pips.addPowerPip();
         } else {
             pips.addNormalPip();
         }
-
-
     }
 }
