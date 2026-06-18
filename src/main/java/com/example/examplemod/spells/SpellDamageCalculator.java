@@ -7,6 +7,8 @@ import com.example.examplemod.pips.PlayerPips;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import com.example.examplemod.combat.DamageNumberManager;
+import com.example.examplemod.combat.effects.CombatEffectManager;
+import com.example.examplemod.combat.effects.PlayerCombatEffects;
 
 public class SpellDamageCalculator {
 
@@ -46,6 +48,16 @@ public class SpellDamageCalculator {
                 );
 
         damage *= 1 + (damageBonus / 100f);
+
+        PlayerCombatEffects casterEffects =
+                CombatEffectManager.get(caster);
+
+        float bladeMultiplier =
+                casterEffects.consumeMatchingBlades(
+                        spell.getSchool()
+                );
+
+        damage *= bladeMultiplier;
 
         float pierce =
                 casterStats.getPierce(

@@ -34,6 +34,16 @@ import com.example.examplemod.items.SpellCardItem;
 import com.example.examplemod.spells.fire.FirecatSpell;
 import com.example.examplemod.spells.balance.ScarabSpell;
 import com.example.examplemod.combat.DamageNumberEvents;
+import com.example.examplemod.combat.effects.CombatEffectEvents;
+//SpellBlades imports
+import com.example.examplemod.spells.fire.FireBladeSpell;
+import com.example.examplemod.spells.fire.EnhancedFireBladeSpell;
+
+import com.example.examplemod.spells.balance.BalanceBladeSpell;
+import com.example.examplemod.spells.balance.EnhancedBalanceBladeSpell;
+
+import com.example.examplemod.spells.utility.ClearBladesSpell;
+//Bis hier hin die SpellBlade imports
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Minecast101.MODID)
@@ -77,6 +87,50 @@ public class Minecast101 {
                             ScarabSpell::new
                     )
             );
+    public static final DeferredItem<Item> FIRE_BLADE_CARD =
+            ITEMS.registerItem(
+                    "fire_blade_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            FireBladeSpell::new
+                    )
+            );
+
+    public static final DeferredItem<Item> ENHANCED_FIRE_BLADE_CARD =
+            ITEMS.registerItem(
+                    "enhanced_fire_blade_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            EnhancedFireBladeSpell::new
+                    )
+            );
+
+    public static final DeferredItem<Item> BALANCE_BLADE_CARD =
+            ITEMS.registerItem(
+                    "balance_blade_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            BalanceBladeSpell::new
+                    )
+            );
+
+    public static final DeferredItem<Item> ENHANCED_BALANCE_BLADE_CARD =
+            ITEMS.registerItem(
+                    "enhanced_balance_blade_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            EnhancedBalanceBladeSpell::new
+                    )
+            );
+
+    public static final DeferredItem<Item> CLEAR_BLADES_CARD =
+            ITEMS.registerItem(
+                    "clear_blades_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            ClearBladesSpell::new
+                    )
+            );
 
     // Creates a creative tab with the id "minecast101:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
@@ -84,9 +138,21 @@ public class Minecast101 {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> NOVICE_WAND.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
+                //Rüstung und so
                 output.accept(NOVICE_WAND.get());
+                //1 Pip Spells
                 output.accept(FIRECAT_CARD.get());
-                output.accept(SCARAB_CARD.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(SCARAB_CARD.get());
+                //Blades
+                output.accept(FIRE_BLADE_CARD.get());
+                output.accept(ENHANCED_FIRE_BLADE_CARD.get());
+
+                output.accept(BALANCE_BLADE_CARD.get());
+                output.accept(ENHANCED_BALANCE_BLADE_CARD.get());
+
+                output.accept(CLEAR_BLADES_CARD.get());
+
+                // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -109,6 +175,7 @@ public class Minecast101 {
         NeoForge.EVENT_BUS.register(PipEvents.class);
         NeoForge.EVENT_BUS.register(CommandEvents.class);
         NeoForge.EVENT_BUS.register(DamageNumberEvents.class);
+        NeoForge.EVENT_BUS.register(CombatEffectEvents.class);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 

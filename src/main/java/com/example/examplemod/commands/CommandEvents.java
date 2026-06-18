@@ -10,5 +10,6 @@ public class CommandEvents {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         PipCommands.register(event.getDispatcher());
         SpellCommands.register(event.getDispatcher());
+        BladeCommands.register(event.getDispatcher());
     }
 }

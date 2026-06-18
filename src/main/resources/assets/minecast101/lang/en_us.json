@@ -5,6 +5,13 @@
   "item.minecast101.firecat_card": "Firecat",
   "item.minecast101.scarab_card": "Scarab",
 
+
+  "item.minecast101.fire_blade_card": "Fire Blade",
+  "item.minecast101.enhanced_fire_blade_card": "Enhanced Fire Blade",
+  "item.minecast101.balance_blade_card": "Balance Blade",
+  "item.minecast101.enhanced_balance_blade_card": "Enhanced Balance Blade",
+  "item.minecast101.clear_blades_card": "Clear Blades",
+
   "minecast101.configuration.title": "Minecast101 Configs",
   "minecast101.configuration.section.minecast101.common.toml": "Minecast101 Configs",
   "minecast101.configuration.section.minecast101.common.toml.title": "Minecast101 Configs",
