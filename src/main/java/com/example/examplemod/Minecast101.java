@@ -1,6 +1,10 @@
 package com.example.examplemod;
 
+import com.example.examplemod.combat.effects.CombatTrapEvents;
 import com.example.examplemod.items.NoviceWandItem;
+import com.example.examplemod.spells.SpellSchool;
+import com.example.examplemod.spells.utility.BladeSpell;
+import com.example.examplemod.spells.utility.TrapSpell;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -36,11 +40,6 @@ import com.example.examplemod.spells.balance.ScarabSpell;
 import com.example.examplemod.combat.DamageNumberEvents;
 import com.example.examplemod.combat.effects.CombatEffectEvents;
 //SpellBlades imports
-import com.example.examplemod.spells.fire.FireBladeSpell;
-import com.example.examplemod.spells.fire.EnhancedFireBladeSpell;
-
-import com.example.examplemod.spells.balance.BalanceBladeSpell;
-import com.example.examplemod.spells.balance.EnhancedBalanceBladeSpell;
 
 import com.example.examplemod.spells.utility.ClearBladesSpell;
 //Bis hier hin die SpellBlade imports
@@ -92,7 +91,7 @@ public class Minecast101 {
                     "fire_blade_card",
                     properties -> new SpellCardItem(
                             properties,
-                            FireBladeSpell::new
+                            () -> new BladeSpell("Fire Blade", SpellSchool.FIRE, 1.35f, false, "fire_blade")
                     )
             );
 
@@ -101,7 +100,7 @@ public class Minecast101 {
                     "enhanced_fire_blade_card",
                     properties -> new SpellCardItem(
                             properties,
-                            EnhancedFireBladeSpell::new
+                            () -> new BladeSpell("Enhanced Fire Blade", SpellSchool.FIRE, 1.45f, false, "fire_blade_enhanced")
                     )
             );
 
@@ -110,7 +109,7 @@ public class Minecast101 {
                     "balance_blade_card",
                     properties -> new SpellCardItem(
                             properties,
-                            BalanceBladeSpell::new
+                            () -> new BladeSpell("Balance Blade", SpellSchool.BALANCE, 1.25f, true, "balance_blade")
                     )
             );
 
@@ -119,7 +118,7 @@ public class Minecast101 {
                     "enhanced_balance_blade_card",
                     properties -> new SpellCardItem(
                             properties,
-                            EnhancedBalanceBladeSpell::new
+                            () -> new BladeSpell("Enhanced Balance Blade", SpellSchool.BALANCE, 1.35f, true, "balance_blade_enhanced")
                     )
             );
 
@@ -129,6 +128,24 @@ public class Minecast101 {
                     properties -> new SpellCardItem(
                             properties,
                             ClearBladesSpell::new
+                    )
+            );
+
+    public static final DeferredItem<Item> FIRE_TRAP_CARD =
+            ITEMS.registerItem(
+                    "fire_trap_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            () -> new TrapSpell("Fire Trap", SpellSchool.FIRE, 1.40f, false, "fire_trap")
+                    )
+            );
+
+    public static final DeferredItem<Item> BALANCE_TRAP_CARD =
+            ITEMS.registerItem(
+                    "balance_trap_card",
+                    properties -> new SpellCardItem(
+                            properties,
+                            () -> new TrapSpell("Balance Trap", SpellSchool.BALANCE, 1.30f, true, "balance_trap")
                     )
             );
 
@@ -151,6 +168,9 @@ public class Minecast101 {
                 output.accept(ENHANCED_BALANCE_BLADE_CARD.get());
 
                 output.accept(CLEAR_BLADES_CARD.get());
+                //Traps
+                output.accept(FIRE_TRAP_CARD.get());
+                output.accept(BALANCE_TRAP_CARD.get());
 
                 // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
@@ -176,6 +196,7 @@ public class Minecast101 {
         NeoForge.EVENT_BUS.register(CommandEvents.class);
         NeoForge.EVENT_BUS.register(DamageNumberEvents.class);
         NeoForge.EVENT_BUS.register(CombatEffectEvents.class);
+        NeoForge.EVENT_BUS.register(CombatTrapEvents.class);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 

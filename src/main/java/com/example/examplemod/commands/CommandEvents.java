@@ -11,5 +11,6 @@ public class CommandEvents {
         PipCommands.register(event.getDispatcher());
         SpellCommands.register(event.getDispatcher());
         BladeCommands.register(event.getDispatcher());
+        TrapCommands.register(event.getDispatcher());
     }
 }

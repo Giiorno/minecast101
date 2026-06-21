@@ -12,6 +12,9 @@
   "item.minecast101.enhanced_balance_blade_card": "Enhanced Balance Blade",
   "item.minecast101.clear_blades_card": "Clear Blades",
 
+  "item.minecast101.fire_trap_card": "Fire Trap",
+  "item.minecast101.balance_trap_card": "Trap",
+
   "minecast101.configuration.title": "Minecast101 Configs",
   "minecast101.configuration.section.minecast101.common.toml": "Minecast101 Configs",
   "minecast101.configuration.section.minecast101.common.toml.title": "Minecast101 Configs",

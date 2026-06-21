@@ -1,10 +1,8 @@
 package com.example.examplemod.commands;
 
 import com.example.examplemod.combat.effects.CombatEffectManager;
-import com.example.examplemod.spells.balance.BalanceBladeSpell;
-import com.example.examplemod.spells.balance.EnhancedBalanceBladeSpell;
-import com.example.examplemod.spells.fire.EnhancedFireBladeSpell;
-import com.example.examplemod.spells.fire.FireBladeSpell;
+import com.example.examplemod.spells.SpellSchool;
+import com.example.examplemod.spells.utility.BladeSpell;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -27,7 +25,7 @@ public class BladeCommands {
                                                             ServerPlayer player =
                                                                     context.getSource().getPlayerOrException();
 
-                                                            new FireBladeSpell().cast(player, 0);
+                                                            new BladeSpell("Fire Blade", SpellSchool.FIRE, 1.35f, false, "fire_blade").cast(player, 0);
 
                                                             return 1;
                                                         })
@@ -40,7 +38,7 @@ public class BladeCommands {
                                                             ServerPlayer player =
                                                                     context.getSource().getPlayerOrException();
 
-                                                            new EnhancedFireBladeSpell().cast(player, 0);
+                                                            new BladeSpell("Enhanced Fire Blade", SpellSchool.FIRE, 1.45f, false, "fire_blade_enhanced").cast(player, 0);
 
                                                             return 1;
                                                         })
@@ -53,7 +51,7 @@ public class BladeCommands {
                                                             ServerPlayer player =
                                                                     context.getSource().getPlayerOrException();
 
-                                                            new BalanceBladeSpell().cast(player, 0);
+                                                            new BladeSpell("Balance Blade", SpellSchool.BALANCE, 1.25f, true, "balance_blade").cast(player, 0);
 
                                                             return 1;
                                                         })
@@ -66,7 +64,7 @@ public class BladeCommands {
                                                             ServerPlayer player =
                                                                     context.getSource().getPlayerOrException();
 
-                                                            new EnhancedBalanceBladeSpell().cast(player, 0);
+                                                            new BladeSpell("Enhanced Balance Blade", SpellSchool.BALANCE, 1.35f, true, "balance_blade_enhanced").cast(player, 0);
 
                                                             return 1;
                                                         })
@@ -116,10 +114,10 @@ public class BladeCommands {
                                                             ServerPlayer player =
                                                                     context.getSource().getPlayerOrException();
 
-                                                            new FireBladeSpell().cast(player, 0);
-                                                            new EnhancedFireBladeSpell().cast(player, 0);
-                                                            new BalanceBladeSpell().cast(player, 0);
-                                                            new EnhancedBalanceBladeSpell().cast(player, 0);
+                                                            new BladeSpell("Fire Blade", SpellSchool.FIRE, 1.35f, false, "fire_blade").cast(player, 0);
+                                                            new BladeSpell("Enhanced Fire Blade", SpellSchool.FIRE, 1.45f, false, "fire_blade_enhanced").cast(player, 0);
+                                                            new BladeSpell("Balance Blade", SpellSchool.BALANCE, 1.25f, true, "balance_blade").cast(player, 0);
+                                                            new BladeSpell("Enhanced Balance Blade", SpellSchool.BALANCE, 1.35f, true, "balance_blade_enhanced").cast(player, 0);
 
                                                             player.sendSystemMessage(
                                                                     Component.literal("Added all test blades!")
@@ -128,6 +126,10 @@ public class BladeCommands {
                                                             return 1;
                                                         })
                                         )
+
+
+
+
                         )
         );
     }

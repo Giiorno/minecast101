@@ -2,6 +2,8 @@ package com.example.examplemod.spells;
 
 import com.example.examplemod.combat.CombatManager;
 import com.example.examplemod.combat.PlayerCombatStats;
+import com.example.examplemod.combat.effects.CombatTrapManager;
+import com.example.examplemod.combat.effects.PlayerCombatTraps;
 import com.example.examplemod.pips.PipManager;
 import com.example.examplemod.pips.PlayerPips;
 import net.minecraft.world.entity.LivingEntity;
@@ -79,6 +81,16 @@ public class SpellDamageCalculator {
     ) {
         float damage =
                 cast.getOutgoingDamage();
+
+        PlayerCombatTraps targetTraps =
+                CombatTrapManager.get(target);
+
+        float trapMultiplier =
+                targetTraps.consumeMatchingTraps(
+                        cast.getSchool()
+                );
+
+        damage *= trapMultiplier;
 
         if (target instanceof Player targetPlayer) {
             PlayerCombatStats targetStats =
